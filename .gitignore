@@ -1,3 +1,5 @@
 node_modules
-dbTest.js
 .env
+.DS_Store
+*.DS_Store
+*/.DS_Store
