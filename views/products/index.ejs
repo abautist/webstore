@@ -5,6 +5,13 @@
 	<h2><%= product.name %>
 	<small><%= product.price %></small>
 	</h2>
+
+	<form action="/payments" method="POST" role="form">
+			<input type="hidden" name="name" value="<%= product.name %>">
+			<input type="hidden" name="price" value="<%= product.price %>">
+	
+		<button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
+	</form>
 </div>
 
 <% }); %>
