@@ -1,2 +1,7 @@
 node_modules
 dbTest.js
+.env
+controllers/payments.js
+.DS_Store
+*.DS_Store
+*/.DS_Store
