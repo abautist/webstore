@@ -7,7 +7,11 @@ app.use(ejsLayouts);
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 
+var port = process.env.PORT || 3000;
+
 // app.use(express.static(__dirname + '/static'));
+
+
 
 app.set('view engine', 'ejs');
 
@@ -17,6 +21,6 @@ app.get('/', function(req,res) {
 
 app.use("/payments", require("./controllers/payments"));
 
-app.listen(3000, function() {
+app.listen(port, function() {
 	console.log('Port 3000 is live');
 });

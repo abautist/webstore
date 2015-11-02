@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var stripe = require('stripe')('sk_test_YcNgwCy9ZqMPTd096lJotvcY');
+var stripe = require('stripe')(process.env.TEST_SECRET_KEY);
 
 
 router.route("/")
