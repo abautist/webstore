@@ -11,8 +11,6 @@ var port = process.env.PORT || 3000;
 
 // app.use(express.static(__dirname + '/static'));
 
-
-
 app.set('view engine', 'ejs');
 
 app.get('/', function(req,res) {
@@ -20,6 +18,7 @@ app.get('/', function(req,res) {
 });
 
 app.use("/payments", require("./controllers/payments"));
+app.use("/products", require("./controllers/products"));
 
 app.listen(port, function() {
 	console.log('Port 3000 is live');
