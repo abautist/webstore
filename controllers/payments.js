@@ -13,21 +13,24 @@ router.route("/")
 		db.user.findById(req.session.user).then(function(user) {
 			if (user) {
 				req.currentUser = user;
-				user.createCart({
+				req.currentUser.createCart({
 					name: req.body.name,
 					price: req.body.price
-			}).then(function(cart) {
-				console.log(cart.get());
-				res.render("payments/index", {cart: cart});
+				}).then(function(cart) {
+					console.log(cart.get());
+					res.render("payments/index", {cart: cart});
 				});
-			};
+			} else {
+				req.flash("danger", "You have to login to continue");
+				res.redirect("/auth/login");
+			}		
 		});
-	});
+});
 
 router.post("/completed", function(req, res) {
 	var stripeToken = req.body.stripeToken;
 	var stripeEmail = req.body.stripeEmail;
-
+	var userId = req.currentUser.id;
 //stripe charge
 	var charge = {
 		amount: 3000,
@@ -50,29 +53,25 @@ router.post("/completed", function(req, res) {
 	  			
 	  			db.cart.destroy({
 	  				where: {
-	  					userId: cart.userId
+	  					userId: userId
 	  				}
 	  			}).then(function() {
 					console.log("cart cleared");
+					req.currentUser.createSale({
+						email: stripeEmail,
+						price: charge.amount,
+						stripeToken: stripeToken
+					}).then(function(sale) {
+						console.log(sale.get());
+						res.render("payments/show");
+					});
 				}).catch(function() {
 					console.log("error")
 				});
-				db.sale.findOrCreate({
-					where: {
-						email: stripeEmail
-					},
-					defaults: {
-						email: stripeEmail,
-						price: 3000,
-						stripeToken: stripeToken,
-						userId: sale.userId
-				  				}
-						}).spread(function(sale, created) {
-							console.log(sale.get());
-							res.render("payments/show");
-						});
-				}
-	});
+				
+				
+			}
+		});
 });
 
 			

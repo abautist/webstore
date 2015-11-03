@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     email: DataTypes.STRING,
     price: DataTypes.INTEGER,
     stripeToken: DataTypes.STRING,
-    userId: DataTypes.STRING
+    userId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
