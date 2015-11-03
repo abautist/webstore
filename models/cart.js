@@ -1,13 +1,14 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var cart = sequelize.define('cart', {
-    name: DataTypes.STRING,
+    name: DataTypes.TEXT,
     price: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.cart.belongsTo(models.user);
       }
     }
   });
