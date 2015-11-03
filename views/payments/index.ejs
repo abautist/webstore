@@ -6,24 +6,17 @@
 	<small><%= cart.price %></small>
 	</h2>
 </div>
-  <form id="payment-form" role="form" autocomplete="on" action="/payments/completed" method="POST" style="max-width: 300px;">
-        <div id="charge-error" class="alert alert-danger payment-errors"></div>
-        <div class="form-group">
-          <label>Credit Card Info</label>
-          <input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
-        </div>
-        <div class="form-group">
-          <input type="tel" class="form-control cc-cvc card-cvc" data-stripe="cvc" autocomplete="off" placeholder="CVC" required>
-        </div>
-        <div class="form-group">
-          <label>Card Expiration Date</label>
-          <input type="text" data-stripe="exp-month" placeholder="MM" class="card-expiry-month form-control" required>
-          <input type="text" data-stripe="exp-year" placeholder="YYYY" class="card-expiry-year form-control" required>
-        </div>
-      <button type="submit">Submit Payment</button>
-  </form>
 
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<form action="/payments/completed" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_0B4uabmzHVzumNf1oxqs7y13"
+    data-amount="3000"
+    data-name="Demo Site"
+    data-description="2 widgets ($30.00)"
+    data-image="/128x128.png"
+    data-locale="auto">
+  </script>
+</form>
 
 </body>
