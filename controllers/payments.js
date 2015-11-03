@@ -25,21 +25,27 @@ router.route("/")
 		});
 });
 
+router.post("/completed", function(req, res) {
+	var stripeToken = req.body.stripeToken;
+
+	db.cart.find({
+		where: { 
+			name: "Hakurei Turnip"
+		}
+	}).then(function(){
+		var charge = {
+		amount: 1000,
+		currency: "usd",
+		card: stripeToken
+	};
+		stripe.charges.create(charge, 
+			function(err, charge) {
+		if (err && err.type === 'StripeCardError') {
+		    console.log("Error Error");
+		  }
+		});
+		res.render("payments/show");
+	});
+});
+
 module.exports = router;
-
-// 	.post(function(req,res) {
-// 	var stripeToken = req.body.stripeToken;
-
-// 	var charge = stripe.charges.create({
-// 	  amount: 1000, // amount in cents, again
-// 	  currency: "usd",
-// 	  source: stripeToken,
-// 	  description: "Example charge"
-// 	}, function(err, charge) {
-// 	if (err && err.type === 'StripeCardError') {
-// 	    console.log("Error Error");
-// 	  }
-// 	});
-// 	console.log(charge);
-// 	res.redirect("/");
-// });
