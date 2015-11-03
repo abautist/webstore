@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var db = require('./../models');
 
-var stripe = require('stripe')("sk_test_YcNgwCy9ZqMPTd096lJotvcY");
+var stripe = require('stripe')(process.env.TEST_SECRET_KEY);
 
 
 router.route("/")
@@ -26,27 +26,28 @@ router.route("/")
 });
 
 router.post("/completed", function(req, res) {
-	// console.log(process.env.TEST_SECRET_KEY);
 	var stripeToken = req.body.stripeToken;
-
-	// db.cart.find({
-	// 	where: { 
-	// 		name: "Hakurei Turnip"
-	// 	}
-	// }).then(function(){
-		var charge = {
-		amount: 1000,
+	var charge = {
+		amount: 3000,
 		currency: "usd",
 		card: stripeToken
 		};
-			stripe.charges.create(charge, 
-				function(err, charge) {
+
+	stripe.charges.create(charge, 
+		function(err, charge) {
 			if (err && err.type === 'StripeCardError') {
-			    console.log("Error Error");
-			  }
-			});
-			res.render("payments/show");
-	});
+	    		console.log("Error Error");
+	  		} else {
+	  			console.log('Successful charge sent to Stripe!');
+            }
+		});
+
+
+
+	res.render("payments/show");
+});
 // });
+
+
 
 module.exports = router;
