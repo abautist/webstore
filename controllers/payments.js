@@ -27,11 +27,15 @@ router.route("/")
 
 router.post("/completed", function(req, res) {
 	var stripeToken = req.body.stripeToken;
+	var product = req.body.product;
+
 	var charge = {
 		amount: 3000,
 		currency: "usd",
 		card: stripeToken
 		};
+
+	console.log(stripeToken);
 
 	stripe.charges.create(charge, 
 		function(err, charge) {
@@ -39,14 +43,24 @@ router.post("/completed", function(req, res) {
 	    		console.log("Error Error");
 	  		} else {
 	  			console.log('Successful charge sent to Stripe!');
-            }
-		});
 
-
-
-	res.render("payments/show");
+	  			db.sale.findOrCreate({
+	  				where: {
+	  					name: product
+	  				},
+	  				defaults: {
+	  					name: name,
+	  					price: charge.amount,
+	  					stripeToken: charge.card,
+	  					userId: 1
+	  				}
+	  			}).spread(function(sale, created) {
+	  				console.log(sale.get());
+	  		});
+	  	}	
+		res.render("payments/show");
+	});
 });
-// });
 
 
 

@@ -9,7 +9,29 @@
 	<script type="text/javascript" src="/script.js"></script>
 </head>
 <body>
-	<%- body %>
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<p class="navbar-brand">
+				<a href="/">Home</a>
+			</p>
+		</div>
+		<ul class="nav navbar-nav navbar-right ">
+			<% if (currentUser) { %>
+				<li><a href="/auth/logout">Logout</a></li>
+			<% } else { %>
+				<li><a href="/auth/login">Login</a></li>
+				<li><a href="/auth/signup">Signup</a></li>
+			<% } %>
+		</ul>
+	</nav>
+	<section class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<% include alerts %>
+				<%- body %>
+			</div>
+		</div>
+	</section>
 
 </body>
 </html>
