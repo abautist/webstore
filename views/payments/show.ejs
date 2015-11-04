@@ -1,11 +1,32 @@
-<h1>Boom. You've got veggies on the way.</h1>
+<h1>You've got veggies on the way.</h1>
 
-<div class="well">
+<div class="well item-display">
   <a href="#" class="thumbnail">
     <img src="<%= sale.image %>" />
   </a>
-	<h2><%= sale.email %>
-		<small>$<%= (sale.price/100) %>.00</small>
-		<small><%= sale.createdAt %></small>
-	</h2>
+</div>
+
+<h3>Sales History</h3>
+<div class="well">
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Order No: <%= sale.id %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Customer Email:</td>
+				<td><%= sale.email %></td>
+			</tr>
+			<tr>
+				<td>Sale Price:</td>
+				<td>$<%= (sale.price/100) %>.00</td>
+			</tr>
+			<tr>
+				<td>Date Created:</td>
+				<td><%= sale.createdAt %></td>
+			</tr>
+		</tbody>
+	</table>
 </div>

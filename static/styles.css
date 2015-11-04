@@ -17,7 +17,7 @@ body {
 	font-size: 24px;
 }
 
-.well {
+.item-display {
 	/*max-width: 600px;*/
 	display: inline-block;
 	margin: 1%;
