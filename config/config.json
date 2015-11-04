@@ -12,6 +12,6 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "DATABSE_URL"
+    "use_env_variable": "DATABASE_URL"
   }
 }
