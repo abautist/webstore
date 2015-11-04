@@ -17,6 +17,9 @@ module.exports = {
       stripeToken: {
         type: Sequelize.STRING
       },
+      image: {
+        type: Sequelize.TEXT
+      }, 
       userId: {
         type: Sequelize.INTEGER
       },

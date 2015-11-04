@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var cart = sequelize.define('cart', {
     name: DataTypes.TEXT,
     price: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    image: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {

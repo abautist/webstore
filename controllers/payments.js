@@ -15,7 +15,8 @@ router.route("/")
 				req.currentUser = user;
 				req.currentUser.createCart({
 					name: req.body.name,
-					price: req.body.price
+					price: req.body.price,
+          image: req.body.image
 				}).then(function(cart) {
 					console.log(cart.get());
 					res.render("payments/index", {cart: cart});
@@ -34,7 +35,8 @@ router.post("/completed", function(req, res) {
 
 	//stripe charge
 	db.cart.find({where: {userId: userId}}).then(function(cart) {
-		var charge = {
+		var cartImage = cart.image;
+    var charge = {
 			amount: cart.price*100,
 			currency: "usd",
 			card: stripeToken
@@ -61,10 +63,11 @@ router.post("/completed", function(req, res) {
 					req.currentUser.createSale({
 						email: stripeEmail,
 						price: charge.amount,
-						stripeToken: stripeToken
+						stripeToken: stripeToken,
+            image: cartImage
 					}).then(function(sale) {
 						console.log(sale.get());
-						res.render("payments/show");
+						res.render("payments/show", {sale: sale});
 					});
 				}).catch(function() {
 					console.log("error");

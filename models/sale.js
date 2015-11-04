@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     email: DataTypes.STRING,
     price: DataTypes.INTEGER,
     stripeToken: DataTypes.STRING,
+    image: DataTypes.TEXT,
     userId: DataTypes.INTEGER
   }, {
     classMethods: {
