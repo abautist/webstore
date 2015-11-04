@@ -1,9 +1,12 @@
-<h1>Featured Products</h1>
+<h1 style="text-align: center;">This Week's Fresh Sheet</h1>
 
 <% product.forEach(function(product) { %>
 	
 <div class="well">
-	<h2><%= product.name %>
+	<a href="#" class="thumbnail">
+		<img src="<%= product.image %>" />
+	</a>
+	<h2 id="product-name"><%= product.name %>
 	<br /><small>$<%= product.price %>.00</small>
 	</h2>
 
