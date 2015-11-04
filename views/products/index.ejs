@@ -12,6 +12,18 @@
 	
 		<button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
 	</form>
+
+	<form action="/products/<%= product.id %>/tags" method="POST" role="form">
+	  <legend>Add a new Tag</legend>
+
+	  <div class="form-group">
+	    <label for="tag">Name</label>
+	    <input type="text" class="form-control" id="tag" placeholder="Input field" name="tag">
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
 </div>
 
 <% }); %>
