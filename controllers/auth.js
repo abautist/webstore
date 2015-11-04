@@ -17,7 +17,7 @@ router.route("/login")
 				} else if (user) {
 					req.session.user = user.id;
 					req.flash("success", "You are logged in");
-					res.redirect("/");
+					res.redirect("/products");
 				} else {
 					req.flash("danger", "Invalid username or password");
 					res.redirect("/auth/login");

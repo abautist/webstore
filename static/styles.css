@@ -1,6 +1,22 @@
+body {
+	font-family: 'Muli', sans-serif;
+}
+
 #frontpage {
 
 	background: url('images/background.jpg');
 	background-size: cover;
 	background-repeat: none;
+}
+
+.jumbotron {
+	margin-top: 3%;
+}
+
+.well {
+	/*max-width: 600px;*/
+	display: inline-block;
+	margin: 1%;
+	width: 30%;
+	
 }

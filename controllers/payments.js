@@ -32,10 +32,12 @@ router.post("/completed", function(req, res) {
 	var stripeEmail = req.body.stripeEmail;
 	var userId = req.currentUser.id;
 
+
 //stripe charge
-	db.cart.findById(userId).then(function(cart) {
+	db.cart.find({where: {userId: userId}}).then(function(cart) {
+
 		var charge = {
-			amount: cart.price,
+			amount: cart.price*100,
 			currency: "usd",
 			card: stripeToken
 			};

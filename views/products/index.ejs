@@ -1,29 +1,29 @@
 <h1>Featured Products</h1>
+
 <% product.forEach(function(product) { %>
 	
 <div class="well">
 	<h2><%= product.name %>
-	<small><%= product.price %></small>
+	<br /><small>$<%= product.price %>.00</small>
 	</h2>
 
 	<form action="/payments" method="POST" role="form">
 			<input type="hidden" name="name" value="<%= product.name %>">
 			<input type="hidden" name="price" value="<%= product.price %>">
 	
-		<button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
+		<button type="submit" class="btn btn-primary pull-left">Add to Cart</button>
 	</form>
-
+	<br />
+	<br />
+	<br />
 	<form action="/products/<%= product.id %>/tags" method="POST" role="form">
-	  <legend>Add a new Tag</legend>
-
 	  <div class="form-group">
-	    <label for="tag">Name</label>
-	    <input type="text" class="form-control" id="tag" placeholder="Input field" name="tag">
+	    <label for="tag">Tag your produce</label>
+	    <input type="text" class="form-control" id="tag" placeholder="ex. vegetarian" name="tag">
 	  </div>
 
-	  <button type="submit" class="btn btn-primary">Submit</button>
+	  <button type="submit" class="btn btn-primary">Add Tag</button>
 	</form>
-
 </div>
 
 <% }); %>

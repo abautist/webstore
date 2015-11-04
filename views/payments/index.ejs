@@ -3,7 +3,7 @@
 
 <div class="well">
 	<h2><%= cart.name %>
-	<small><%= cart.price %></small>
+	<small>$<%= cart.price %>.00</small>
 	</h2>
 </div>
 
@@ -11,9 +11,9 @@
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_0B4uabmzHVzumNf1oxqs7y13"
-    data-amount="3000"
-    data-name="Demo Site"
-    data-description="2 widgets ($30.00)"
+    data-amount=<%= (cart.price)*100 %>
+    data-name=<%= cart.name %>
+    data-description="Vegetables"
     data-image="/128x128.png"
     data-locale="auto">
   </script>
