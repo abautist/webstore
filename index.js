@@ -55,6 +55,7 @@ app.get('/', function(req,res) {
 app.use("/auth", require("./controllers/auth"));
 app.use("/payments", require("./controllers/payments"));
 app.use("/products", require("./controllers/products"));
+app.use("/tags", require("./controllers/tags"));
 
 app.listen(port, function() {
 	console.log('Port 3000 is live');
