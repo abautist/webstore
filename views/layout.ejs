@@ -4,9 +4,11 @@
 	<title>Jumanji Farm Webstore</title>
 	<!-- Latest compiled and minified CSS & JS -->
 	<link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<script src="//code.jquery.com/jquery.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/script.js"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -20,7 +22,7 @@
 			<li><a href="#">Feast</a></li>
 			<li><a href="/tags">All Tags</a></li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right ">
+		<ul class="nav navbar-nav navbar-right" style="padding-right:30px;">
 			<% if (currentUser) { %>
 				<li><a href="/auth/logout">Logout</a></li>
 			<% } else { %>
@@ -31,7 +33,7 @@
 	</nav>
 	<section class="container">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<% include alerts %>
 				<%- body %>
 			</div>
