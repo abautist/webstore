@@ -62,6 +62,8 @@ module.exports = function(sequelize, DataTypes) {
               callback(null, user);
             }
           });
+        } else {
+          callback(null, user);
         }
       }
     }

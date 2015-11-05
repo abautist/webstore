@@ -44,11 +44,11 @@ module.exports = {
           });
         } else {
           var email = profile.emails[0].value;
-          console.log('CREATED');
           db.user.findOrCreate({
             where: {email: email},
             defaults: {email: email, name: profile.displayName}
           }).spread(function(user, created) {
+          console.log('CREATED');
             if (created) {
               user.createProvider({
                 pid: profile.id,
