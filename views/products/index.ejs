@@ -15,7 +15,7 @@
 			<input type="hidden" name="price" value="<%= product.price %>">
 			<input type="hidden" name="image" value="<%= product.image %>">
 	
-		<button type="submit" class="btn btn-primary pull-left">Add to Cart</button>
+		<button type="submit" class="btn btn-primary pull-left"><i class="fa fa-cart-plus fa-lg"></i></button>
 	</form>
 	<br />
 	<br />
@@ -23,10 +23,10 @@
 	<form action="/products/<%= product.id %>/tags" method="POST" role="form">
 	  <div class="form-group">
 	    <label for="tag">Tag your produce</label>
-	    <input type="text" class="form-control" id="tag" placeholder="ex. vegetarian" name="tag">
+	    <input type="text" class="form-control" id="tag" placeholder="ex. sweet" name="tag">
 	  </div>
 
-	  <button type="submit" class="btn btn-primary">Add Tag</button>
+	  <button type="submit" class="btn btn-default"><i class="fa fa-plus fa-lg"></i></button>
 	</form>
 </div>
 

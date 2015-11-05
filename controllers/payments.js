@@ -50,7 +50,7 @@ router.post("/completed", function(req, res) {
 			if (err && err.type === 'StripeCardError') {
 	    		console.log("Error Error");
 	    		res.send('Error');
-	  		} else {
+	  	} else {
 	  			console.log('Successful charge sent to Stripe!');
 	  			console.log(stripeToken);
 	  			
@@ -66,8 +66,12 @@ router.post("/completed", function(req, res) {
 						stripeToken: stripeToken,
             image: cartImage
 					}).then(function(sale) {
-						console.log(sale.get());
-						res.render("payments/show", {sale: sale});
+							
+							db.sale.findAll({
+								order: 'id DESC'
+							}).then(function(sales) {
+								res.render("payments/show", {sale: sale, sales: sales});
+							});	
 					});
 				}).catch(function() {
 					console.log("error");

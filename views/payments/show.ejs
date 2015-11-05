@@ -1,32 +1,36 @@
 <h1>You've got veggies on the way.</h1>
 
 <div class="well item-display">
+  <h3>Your Sale</h3>
   <a href="#" class="thumbnail">
     <img src="<%= sale.image %>" />
   </a>
+  <p>Order No: <%= sale.id %></p>
 </div>
 
 <h3>Sales History</h3>
-<div class="well">
-	<table class="table table-condensed">
-		<thead>
-			<tr>
-				<th>Order No: <%= sale.id %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Customer Email:</td>
-				<td><%= sale.email %></td>
-			</tr>
-			<tr>
-				<td>Sale Price:</td>
-				<td>$<%= (sale.price/100) %>.00</td>
-			</tr>
-			<tr>
-				<td>Date Created:</td>
-				<td><%= sale.createdAt %></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<% sales.forEach(function(sales) { %>
+	<div class="well">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>Order No: <%= sales.id %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Customer Email:</td>
+					<td><%= sales.email %></td>
+				</tr>
+				<tr>
+					<td>Sale Price:</td>
+					<td>$<%= (sales.price/100) %>.00</td>
+				</tr>
+				<tr>
+					<td>Date Created:</td>
+					<td><%= sales.createdAt %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<% }); %>
