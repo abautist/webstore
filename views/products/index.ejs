@@ -9,14 +9,24 @@
 	<h2 id="product-name"><%= product.name %>
 	<br /><small>$<%= product.price %>.00</small>
 	</h2>
-
-	<form action="/payments" method="POST" role="form">
-			<input type="hidden" name="name" value="<%= product.name %>">
-			<input type="hidden" name="price" value="<%= product.price %>">
-			<input type="hidden" name="image" value="<%= product.image %>">
-	
-		<button type="submit" class="btn btn-primary pull-left"><i class="fa fa-cart-plus fa-lg"></i></button>
-	</form>
+	<span>
+		<form action="/payments" method="POST" role="form">
+				<input type="hidden" name="name" value="<%= product.name %>">
+				<input type="hidden" name="price" value="<%= product.price %>">
+				<input type="hidden" name="image" value="<%= product.image %>">
+		
+			<button type="submit" class="btn btn-primary pull-left"><i class="fa fa-cart-plus fa-lg"></i></button>
+		</form>
+	</span>
+	<span>
+		<form action="/feast" method="POST" role="form">
+				<input type="hidden" name="name" value="<%= product.name %>">
+				<input type="hidden" name="price" value="<%= product.price %>">
+				<input type="hidden" name="image" value="<%= product.image %>">
+		
+			<button type="submit" class="btn btn-default pull-right"><i class="fa fa-heart-o fa-lg"></i></button>
+		</form>
+	</span>
 	<br />
 	<br />
 	<br />
