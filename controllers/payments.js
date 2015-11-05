@@ -10,22 +10,27 @@ router.route("/")
 		res.render("payments/index");
 	})
 	.post(function(req,res) {
-		db.user.findById(req.session.user).then(function(user) {
-			if (user) {
-				req.currentUser = user;
-				req.currentUser.createCart({
-					name: req.body.name,
-					price: req.body.price,
-          image: req.body.image
-				}).then(function(cart) {
-					console.log(cart.get());
-					res.render("payments/index", {cart: cart});
+		if (!req.session.user) {
+			req.flash("danger", "You have to login to continue");
+			res.redirect("/auth/login");
+		} else {
+				db.user.findById(req.session.user).then(function(user) {
+					if (user) {
+						req.currentUser = user;
+						req.currentUser.createCart({
+							name: req.body.name,
+							price: req.body.price,
+		          image: req.body.image
+						}).then(function(cart) {
+							console.log(cart.get());
+							res.render("payments/index", {cart: cart});
+						});
+					} else {
+						req.flash("danger", "You have to login to continue");
+						res.redirect("/auth/login");
+					}		
 				});
-			} else {
-				req.flash("danger", "You have to login to continue");
-				res.redirect("/auth/login");
 			}		
-		});
 });
 
 router.post("/completed", function(req, res) {

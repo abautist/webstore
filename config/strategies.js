@@ -44,9 +44,10 @@ module.exports = {
           });
         } else {
           var email = profile.emails[0].value;
+          console.log('CREATED');
           db.user.findOrCreate({
             where: {email: email},
-            defaults: {name: profile.displayName}
+            defaults: {email: email, name: profile.displayName}
           }).spread(function(user, created) {
             if (created) {
               user.createProvider({
@@ -59,6 +60,8 @@ module.exports = {
             } else {
               done(null, false, {message: 'You already signed up with this email address. Please login'});
             }
+          }).catch(function(err) {
+            res.render('error,', err);
           });
         }
       });

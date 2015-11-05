@@ -20,6 +20,18 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+var flash = require("connect-flash");
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(strategies.serializeUser);
+passport.deserializeUser(strategies.deserializeUser);
+
+passport.use(strategies.localStrategy);
+passport.use(strategies.facebookStrategy);
+
 app.use(function(req, res, next){
 	if (req.session.user) {
 		db.user.findById(req.session.user).then(function(user){
@@ -37,17 +49,6 @@ app.use(function(req, res, next){
 	}
 });
 
-var flash = require("connect-flash");
-app.use(flash());
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(strategies.serializeUser);
-passport.deserializeUser(strategies.deserializeUser);
-
-passport.use(strategies.localStrategy);
-passport.use(strategies.facebookStrategy);
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.currentUser;

@@ -46,8 +46,9 @@ router.route("/login")
       if (user) {
         req.login(user, function(err) {
           if (err) throw err;
+          req.session.user = user.id;
           req.flash('success', 'You are now logged in.');
-          res.redirect('/');
+          res.redirect('/products');
         });
       } else {
         req.flash('danger', 'Error');
@@ -70,7 +71,7 @@ router.get('/callback/:provider', function(req,res) {
       req.login(user, function(err) {
         if (err) throw err;
         req.flash('success', 'You are now logged in with ' + req.params.provider);
-        res.redirect('/');
+        res.redirect('/products');
       });
     } else {
       req.flash('danger', 'Error');
@@ -82,6 +83,7 @@ router.get('/callback/:provider', function(req,res) {
 router.get("/logout", function(req, res) {
 	req.logout();
 	req.flash("info", "You have been logged out");
+	req.session.user = false;
 	res.redirect("/");
 });
 
