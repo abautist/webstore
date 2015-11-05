@@ -7,7 +7,8 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       validate: {
-        isEmail: true
+        isEmail: true,
+        notEmpty: true
       }
     }, 
     password: {
@@ -21,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
+        models.user.hasMany(models.provider);
         models.user.hasMany(models.cart);
         models.user.hasMany(models.sale);
       },
@@ -37,7 +39,16 @@ module.exports = function(sequelize, DataTypes) {
           } else {
             callback(null, false);
           }
-        });
+        }).catch(callback)
+      }
+    },
+    instanceMethods: {
+      checkPassword: function(password, callback){
+        if (password && this.password) {
+          bcrypt.compare(password, this.password, callback);
+        } else {
+          callback(null, false);
+        }
       }
     },
     hooks: {

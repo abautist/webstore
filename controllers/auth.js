@@ -1,29 +1,8 @@
 var express = require("express");
+var passport = require('passport');
+var db = require("../models");
 var router = express.Router();
 
-var db = require("../models");
-
-router.route("/login")
-	.get(function(req,res) {
-		res.render("auth/login");
-	})
-	.post(function(req,res) {
-		db.user.authenticate(
-			req.body.email, 
-			req.body.password, 
-			function(err, user) {
-				if (err) {
-					res.send(err);
-				} else if (user) {
-					req.session.user = user.id;
-					req.flash("success", "You are logged in");
-					res.redirect("/products");
-				} else {
-					req.flash("danger", "Invalid username or password");
-					res.redirect("/auth/login");
-				}
-			});
-	})
 
 router.route("/signup")
 	.get(function (req,res) {
@@ -58,9 +37,51 @@ router.route("/signup")
 		}
 	});
 
+router.route("/login")
+	.get(function(req,res) {
+		res.render("auth/login");
+	})
+	.post(function(req,res) {
+		passport.authenticate('local', function(err, user, info) {
+      if (user) {
+        req.login(user, function(err) {
+          if (err) throw err;
+          req.flash('success', 'You are now logged in.');
+          res.redirect('/');
+        });
+      } else {
+        req.flash('danger', 'Error');
+        res.redirect('/auth/login');
+      }
+    })(req, res);
+  });	
+
+router.get('/login/:provider', function(req,res) {
+	passport.authenticate(
+		req.params.provider,
+		{scope: ['public_profile', 'email']}
+	)(req, res);
+});
+
+router.get('/callback/:provider', function(req,res) {
+	passport.authenticate(req.params.provider, function(err, user, info) {
+    if (err) throw err;
+    if (user) {
+      req.login(user, function(err) {
+        if (err) throw err;
+        req.flash('success', 'You are now logged in with ' + req.params.provider);
+        res.redirect('/');
+      });
+    } else {
+      req.flash('danger', 'Error');
+      res.redirect('/auth/login');
+    }
+  })(req, res);
+});
+
 router.get("/logout", function(req, res) {
+	req.logout();
 	req.flash("info", "You have been logged out");
-	req.session.user = false;
 	res.redirect("/");
 });
 

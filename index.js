@@ -1,21 +1,19 @@
 var express = require('express');
+var db = require("./models");
+var ejsLayouts = require('express-ejs-layouts');
+var bodyParser = require('body-parser');
+var port = process.env.PORT || 3000;
+var session = require("express-session");
+var passport = require('passport');
+var strategies = require('./config/strategies');
 var app = express();
 
-var db = require("./models");
-
-var ejsLayouts = require('express-ejs-layouts');
-app.use(ejsLayouts);
-
-var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
-
-var port = process.env.PORT || 3000;
-
+app.use(ejsLayouts);
 app.use(express.static(__dirname + '/static'));
 
 app.set('view engine', 'ejs');
 
-var session = require("express-session");
 app.use(session({
 	secret: "aldfjk",
 	resave: false,
@@ -41,6 +39,15 @@ app.use(function(req, res, next){
 
 var flash = require("connect-flash");
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(strategies.serializeUser);
+passport.deserializeUser(strategies.deserializeUser);
+
+passport.use(strategies.localStrategy);
+passport.use(strategies.facebookStrategy);
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.currentUser;
