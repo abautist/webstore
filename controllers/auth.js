@@ -70,6 +70,7 @@ router.get('/callback/:provider', function(req,res) {
     if (user) {
       req.login(user, function(err) {
         if (err) throw err;
+        req.session.user = user.id;
         req.flash('success', 'You are now logged in with ' + req.params.provider);
         res.redirect('/products');
       });
