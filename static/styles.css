@@ -2,6 +2,11 @@ body {
 	font-family: 'Muli', sans-serif;
 }
 
+.form-control {
+	width: 50%;
+	margin-bottom: 6px;
+}
+
 #frontpage {
 
 	background: url('images/background.jpg');
@@ -24,6 +29,11 @@ body {
 #log-in {
 	background-color: transparent;
 	border: 1px solid black;
+}
+
+#log-in:hover {
+	border: 1px solid white;
+	background-color: #D3D3D3;
 }
 
 .item-display {

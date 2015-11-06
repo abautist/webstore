@@ -1,9 +1,15 @@
 <h1><%= product.name %> Tags</h1>
+<div class="well item-display">
+	<a href="#" class="thumbnail">
+	    <img src="<%= product.image %>" />
+	</a>
+</div>
 
 <% tags.forEach(function(tag) { %>
-  <div class="well">
+  <div class="well" style="width: 50%">
     <h2><%= tag.tag %></h2>
     <ul>
     </ul>
   </div>
 <% }); %>
+
