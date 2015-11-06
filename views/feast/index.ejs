@@ -1,3 +1,12 @@
-<h1>Your Feast Page
-<small>Add your favorites for easy future reference</small>
-</h1>
+<h1>Your Feast Page</h1>
+
+<% feasts.forEach(function(feasts) { %>
+	<div class="well item-display">
+	  <a href="#" class="thumbnail">
+	    <img src="<%= feasts.image %>" />
+	  </a>
+		<h2><%= feasts.feast %>
+		<small>$<%= feasts.price %>.00</small>
+		</h2>
+	</div>
+<% }); %>

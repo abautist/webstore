@@ -4,30 +4,48 @@ var router = express.Router();
 
 router.route('/')
 	.get(function(req,res) {
-		res.render('feast/index')
+		if (!req.session.user) {
+			req.flash("danger", "You have to login to continue");
+			res.redirect("/auth/login");
+		} else {
+				db.feast.findAll({
+					order: 'id DESC'
+				}).then(function(feasts) {
+					res.render('feast/index', {feasts: feasts});
+			});
+		}
 	})
 	.post(function(req,res) {
-		db.feast.findOrCreate({
-			where: {
-				feast: req.body.name
-			}, 
-			defaults: {
-				price: req.body.price,
-				image: req.body.image
-			}
-		});
-	}).spread(function(feast, created) {
-		console.log(feast.get());
-		res.redirect()
-	})
+		if (!req.session.user) {
+			req.flash("danger", "You have to login to continue");
+			res.redirect("/auth/login");
+		} else {
+			db.user.findById(req.session.user).then(function(user) {
+				if (user) {
+					db.feast.findOrCreate({
+						where: { 
+							userId: user.id,
+							feast: req.body.name
+						},
+						defaults: {
+							userId: user.id,
+							feast: req.body.name,
+							price: req.body.price,
+							image: req.body.image
+						}
+					}).spread(function(feast, created) {
+							res.redirect("/feast")
+						});
+				} else {
+						req.flash("danger", "You have to login to continue");
+						res.redirect("/auth/login");
+					}		
+			});
+		}
+	});
 
 
-('/', function(req, res) {
-  db.tag.findAll({
-    include: [db.product]
-  }).then(function(tags) {
-    res.render('tags/index', {tags: tags});
-  });
-});
+
+
 
 module.exports = router;

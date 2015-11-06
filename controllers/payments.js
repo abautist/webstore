@@ -31,7 +31,7 @@ router.route("/")
 					}		
 				});
 			}		
-});
+	});
 
 router.post("/completed", function(req, res) {
 	var stripeToken = req.body.stripeToken;

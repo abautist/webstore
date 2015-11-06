@@ -49,7 +49,6 @@ app.use(function(req, res, next){
 	}
 });
 
-
 app.use(function(req, res, next) {
   res.locals.currentUser = req.currentUser;
   res.locals.alerts = req.flash();

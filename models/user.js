@@ -25,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
         models.user.hasMany(models.provider);
         models.user.hasMany(models.cart);
         models.user.hasMany(models.sale);
+        models.user.hasMany(models.feast);
       },
       authenticate: function(email, password, callback) {
         this.find({where: { email: email } }).then(function(user) {
