@@ -13,7 +13,6 @@ The webstore was built as a full-stack project during my time as a web developme
 * oAuth
 * Various node modules
 * HTML/CSS
-* jQuery UI
 * Heroku
 * Bootstrap
 * Google Fonts
