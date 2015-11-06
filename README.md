@@ -30,7 +30,7 @@ More wireframes: https://github.com/abautist/webstore/tree/master/static/images/
 
 From there the first major task was getting comfortable with the stripe API and integrating credit card processing into my app (sending requests to Stripe and receiving an encrypted token as a response). The next step was creating the various routes and views of the app. Once the basic structure was created I set up local authentication (signup/login) as well as facebook oAuth. Styling and final revisions followed.
 
-I deployed the site on heroku for online public access.
+I deployed the site on heroku for online public access. https://jumanjifarm.herokuapp.com/
 
 ![JF Screenshot 1](https://github.com/abautist/webstore/blob/master/static/images/Screenshots/landingpage.png "JF Screenshot 1")
 
