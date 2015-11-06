@@ -1,4 +1,4 @@
-# Jumanji Farm webstore
+# Jumanji Farm Online Store
 
 A simple e-commerce site for a small-scale organic farm. Order fresh, high quality vegetables online! The site is built as a RESTful CRUD app integrating Stripe's API and a login authentication option from Facebook.
 
