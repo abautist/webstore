@@ -24,6 +24,8 @@ Conceptualized the app first by sketching wireframes with balsamiq software as w
 
 ![JF Wireframe](https://github.com/abautist/webstore/blob/master/static/images/JF%20Webstore%20Mock-ups/1-Landing%20page.png "JF Wireframe")
 
+![JF Wireframe 2](https://github.com/abautist/webstore/blob/master/static/images/JF%20Webstore%20Mock-ups/2-Featured%20Items%20page.png "JF Wireframe 2")
+
 More wireframes: https://github.com/abautist/webstore/tree/master/static/images/JF%20Webstore%20Mock-ups
 
 From there the first major task was getting comfortable with the stripe API and integrating credit card processing into my app (sending requests to Stripe and receiving an encrypted token as a response). The next step was creating the various routes and views of the app. Once the basic structure was created I set up local authentication (signup/login) as well as facebook oAuth. Styling and final revisions followed.
